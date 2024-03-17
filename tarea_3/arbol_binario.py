@@ -1,6 +1,11 @@
+import os
+import graphviz
+
+from PIL import Image
 from nodo import Nodo
 
 class ArbolBinario:
+
     def __init__(self):
         self.raiz = None
 
@@ -10,7 +15,7 @@ class ArbolBinario:
     def _insert(self, valor, nodo):
         if nodo is None:
             return Nodo(valor)
-    
+
         if(valor < nodo.valor):
             nodo.izq = self._insert(valor, nodo.izq)
         elif(valor > nodo.valor):
@@ -22,7 +27,7 @@ class ArbolBinario:
         print('')
     
     def _inorden(self, nodo):
-        if nodo !=None:
+        if nodo != None:
             self._inorden(nodo.izq)
             print(nodo.valor, end="-")
             self._inorden(nodo.der)
@@ -35,6 +40,7 @@ class ArbolBinario:
             print("No encontrado")
             return Nodo(-1)
         if nodo.valor == valor:
+            print('El valor encontrado es: ', nodo.valor)
             return nodo
         if(valor < nodo.valor):
             return self._buscar(valor, nodo.izq)
@@ -89,3 +95,8 @@ class ArbolBinario:
             if nodo.der is not None:
                 dot.edge(str(nodo.valor), str(nodo.der.valor))
                 self._generar_arbol_grafico(nodo.der, dot)
+
+    def abrir_imagen(self, ruta):
+        ruta_absoluta = os.path.join(os.getcwd(), ruta)
+        imagen = Image.open(ruta_absoluta)
+        imagen.show()

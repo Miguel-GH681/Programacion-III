@@ -1,14 +1,20 @@
+import os
+
 from arbol_binario import ArbolBinario
 
 arbol_binario = ArbolBinario()
 opcion = 0
 
-while(opcion != 6):
-    print('Menú principal')
-    print('1. Leer documento ')
-    print('2. Insertar dato ')
-    print('3. Buscar dato ')
-    print('4. Eliminar dato')
+while(opcion != 5):
+    os.system('clear')
+    print('---------------------')
+    print('|    Menú principal  |')
+    print('| 1. Leer documento  |')
+    print('| 2. Insertar dato   |')
+    print('| 3. Buscar dato     |')
+    print('| 4. Eliminar dato   |')
+    print('| 5. Salir           |')
+    print('---------------------')
     opcion = int(input('Ingrese una opción: '))
 
     if opcion == 1:
@@ -19,7 +25,9 @@ while(opcion != 6):
                     arbol_binario.insert(int(linea.strip()))
             print('El recorrido inorden del nuevo árbol creado queda de la siguiente manera: ')
             arbol_binario.inorden()
-            input('Presione enter para continuar')
+            arbol_binario.generar_arbol_grafico()
+            arbol_binario.abrir_imagen('arbol.dot.png')
+            input('Presione enter para continuar\n')
         except:
             print('Ha ocurrido un error, inténtelo nuevamente')
             input('Presione enter para continuar')
@@ -29,6 +37,8 @@ while(opcion != 6):
             arbol_binario.insert(valor)
             print('El recorrido inorden del nuevo árbol creado queda de la siguiente manera: ')
             arbol_binario.inorden()
+            arbol_binario.generar_arbol_grafico()
+            arbol_binario.abrir_imagen('arbol.dot.png')
             input('Presione enter para continuar')
         except:
             print('Ha ocurrido un error, inténtelo nuevamente')
@@ -47,10 +57,14 @@ while(opcion != 6):
             arbol_binario.eliminar(valor)
             print('El recorrido inorden del nuevo árbol creado queda de la siguiente manera: ')
             arbol_binario.inorden()
+            arbol_binario.generar_arbol_grafico()
+            arbol_binario.abrir_imagen('arbol.dot.png')
             input('Presione enter para continuar')
         except:
             print('Ha ocurrido un error, inténtelo nuevamente')
             input('Presione enter para continuar')
+    elif opcion == 5:
+        print('Cerrando programa...')
     else:
         print('Ingrese una opción válida')
         input('Presione enter para continuar')
