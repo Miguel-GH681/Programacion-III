@@ -4,4 +4,4 @@ En este repositorio se encuentran las tareas del curso de Programación III. Las
 ## Autores
 Las tareas que se encuentran en  este repositorio estan hechas por las siguientes personas:
 - Alvaro Miguel González Hic - 9490224805 - 100%
-- Walter Daniel Palacios De Leon
+- Walter Daniel Palacios De León - 9490212140 - 100%
