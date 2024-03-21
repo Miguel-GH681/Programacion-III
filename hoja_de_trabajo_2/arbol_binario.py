@@ -1,5 +1,5 @@
 import os
-import graphviz
+#import graphviz
 import pickle
 
 from arbol import Arbol
