@@ -12,3 +12,12 @@ class ListaSimple:
     def eliminar_primero(self):
         if self.cabeza:
             self.cabeza = self.cabeza.siguiente
+
+    def eliminar_ultimo(self):
+        if self.cabeza.siguiente == None:
+            self.cabeza = None
+        else:
+            actual = self.cabeza
+            while actual.siguiente.siguiente != None:
+                actual = actual.siguiente
+            actual.siguiente = None
