@@ -16,41 +16,23 @@ class BodyController:
         elif value.bodyId > root.value.bodyId:
             root.right = self._insert_body(root.right, value)
 
-        root = self._balancear(value.bodyId, root)
-
-        return root
-
-    def get_body(self, value):
-        return self._get_body(self.root, value)
-
-    def _get_body(self, root, value):
-        if root is None:
-            return None
-        elif value == root.value.bodyId:
-            return root.value
-        elif value < root.value.bodyId:
-            return self._get_body(root.left, value)
-        elif value > root.value.bodyId:
-            return self._get_body(root.right, value)
-
-    def _balancear(self, value, root):
         root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
+
         balance = self._get_balance(root)
 
-        #Caso de rotacion simple a la derecha
-        if balance > 1 and value < root.left.value.bodyId:
+        # Rotaciones para balancear el árbol
+        if balance > 1 and value.bodyId < root.left.value.bodyId:
             return self._rotate_right(root)
-        #Caso de rotacion simple a la izquierda
-        if balance < -1 and value > root.right.value.bodyId:
+        if balance < -1 and value.bodyId > root.right.value.bodyId:
             return self._rotate_left(root)
-        #Caso de rotacion doble a al derecha-izquierda
-        if balance > 1 and value > root.left.value.bodyId:
+        if balance > 1 and value.bodyId > root.left.value.bodyId:
             root.left = self._rotate_left(root.left)
             return self._rotate_right(root)
-        #Caso de rotacion doble a la izquierda-derecha
-        if balance < -1 and value < root.right.value.bodyId:
+        if balance < -1 and value.bodyId < root.right.value.bodyId:
             root.right = self._rotate_right(root.right)
             return self._rotate_left(root)
+
+        return root
 
 
     def _get_height(self, root):
@@ -87,6 +69,19 @@ class BodyController:
 
         return y
 
+    def get_body(self, value):
+        return self._get_body(self.root, value)
+
+    def _get_body(self, root, value):
+        if root is None:
+            return None
+        elif value == root.value.bodyId:
+            return root.value
+        elif value < root.value.bodyId:
+            return self._get_body(root.left, value)
+        elif value > root.value.bodyId:
+            return self._get_body(root.right, value)
+
 
     def generar_arbol_grafico(self):
         dot = graphviz.Digraph()
@@ -104,6 +99,7 @@ class BodyController:
             if nodo.right is not None:
                 dot.edge(str(nodo.value.bodyId), str(nodo.right.value.bodyId))
                 self._generar_arbol_grafico(nodo.right, dot)
+
 
 
 

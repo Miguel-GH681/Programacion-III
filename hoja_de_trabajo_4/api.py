@@ -62,5 +62,26 @@ class Asteroid:
         bc.generar_arbol_grafico()
         return jsonify({'message': 'Ya puede visualizar su imagen'})
 
+    @app.route('/get_info_grupo', methods=['GET'])
+    def get_info_grupo():
+        return jsonify([{
+            'Nombre': 'Alvaro Miguel Gonzalez Hic',
+            'Carnet': '9490-22-4805',
+            'Contribuciones': [
+                'Creacion de los metodos post y get',
+                'Configuracion del proyecto en Render',
+                'Creacion de los modelos de datos',
+            ]
+        },
+        {
+        'Nombre': 'Walter Daniel Palacios De Leon',
+        'Carnet': '9490-21-2140',
+        'Contribuciones': [
+            'Creacion de la carga masiva',
+            'Creacion del metodo de la informacion del grupo',
+            'Creacion de la estructura de la aplicacion'
+        ]
+        }])
+
     if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0', port=3000)
