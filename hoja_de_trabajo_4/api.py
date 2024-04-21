@@ -64,7 +64,9 @@ class Asteroid:
 
     @app.route('/get_info_grupo', methods=['GET'])
     def get_info_grupo():
-        return jsonify([{
+        return jsonify([
+        {'Repositorio': 'https://github.com/Miguel-GH681/Programacion-III/tree/master/hoja_de_trabajo_4'},
+        {
             'Nombre': 'Alvaro Miguel Gonzalez Hic',
             'Carnet': '9490-22-4805',
             'Contribuciones': [
