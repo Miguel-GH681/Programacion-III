@@ -1,0 +1,57 @@
+digraph G{
+        node[shape=box, width=0.7, height=0.7, fontname="Arial", fillcolor="white", style=filled]
+        edge[style = "bold"]
+        node[label = "capa:0" fillcolor="darkolivegreen1" pos = "-1,1!"]raiz;label = "
+matriz_ejemplo" 
+fontname="Arial Black" 
+fontsize="25pt" 
+
+                        
+
+	node[label = "F0" fillcolor="azure3" pos="-1,-0!" shape=box]x0;
+	node[label = "F1" fillcolor="azure3" pos="-1,-1!" shape=box]x1;
+	node[label = "F2" fillcolor="azure3" pos="-1,-2!" shape=box]x2;
+	x0->x1;
+	x0->x1[dir=back];
+	x1->x2;
+	x1->x2[dir=back];
+	raiz->x0;
+	node[label = "C0" fillcolor="azure3" pos = "0,1!" shape=box]y0;
+	node[label = "C1" fillcolor="azure3" pos = "1,1!" shape=box]y1;
+	node[label = "C2" fillcolor="azure3" pos = "2,1!" shape=box]y2;
+	y0->y1;
+	y0->y1[dir=back];
+	y1->y2;
+	y1->y2[dir=back];
+	raiz->y0;
+	node[label="Transitable" fillcolor="white" pos="0,-0!" shape=box]i0_0;
+	node[label="Transitable" fillcolor="white" pos="1,-0!" shape=box]i0_1;
+	node[label="Unidad Civil" fillcolor="blue" pos="2,-0!" shape=box]i0_2;
+	i0_0->i0_1;
+	i0_0->i0_1[dir=back];
+	i0_1->i0_2;
+	i0_1->i0_2[dir=back];
+	x0->i0_0;
+	x0->i0_0[dir=back];
+	node[label="Restaurante" fillcolor="lightgrey" pos="1,-1!" shape=box]i1_1;
+	x1->i1_1;
+	x1->i1_1[dir=back];
+	node[label="Unidad Civil" fillcolor="blue" pos="0,-2!" shape=box]i2_0;
+	node[label="Unidad Civil" fillcolor="blue" pos="2,-2!" shape=box]i2_2;
+	i2_0->i2_2;
+	i2_0->i2_2[dir=back];
+	x2->i2_0;
+	x2->i2_0[dir=back];
+	i0_0->i2_0;
+	i0_0->i2_0[dir=back];
+	y0->i0_0;
+	y0->i0_0[dir=back];
+	i0_1->i1_1;
+	i0_1->i1_1[dir=back];
+	y1->i0_1;
+	y1->i0_1[dir=back];
+	i0_2->i2_2;
+	i0_2->i2_2[dir=back];
+	y2->i0_2;
+	y2->i0_2[dir=back];
+}
