@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./tarea_4/models",
+        "./tarea_4/controllers"
+    ]
+}
