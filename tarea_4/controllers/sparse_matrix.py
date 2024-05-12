@@ -4,6 +4,8 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), 'controllers'))
 sys.path.append(os.path.join(os.path.dirname(__file__), 'models'))
 
+from PIL import Image
+
 from head_list import HeadList
 from cell_node import CellNode
 from head_node import HeadNode
@@ -104,7 +106,6 @@ class SparseMatrix:
                 pivot = pivot.next
             content += '\n\traiz->x{};'.format(self.rows.first.item.id)
 
-            # --graficar nodos columna
             pivoty : HeadNode = self.columns.first
             posy = 0
             while pivoty != None:
@@ -119,43 +120,19 @@ class SparseMatrix:
                 pivoty = pivoty.next
             content += '\n\traiz->y{};'.format(self.columns.first.item.id)
 
-            #ya con las cabeceras graficadas, lo siguiente es los nodos internos, o nodosCelda
             pivot : CellNode = self.rows.first
             posx = 0
             while pivot != None:
                 pivote_celda : HeadNode = pivot.access
                 while pivote_celda != None:
-                    # --- buscamos posy
                     pivoty = self.columns.first
                     posy_celda = 0
                     while pivoty != None:
                         if pivoty.item.id == pivote_celda.y_coordinate.id: break
                         posy_celda += 1
                         pivoty = pivoty.next
-                    if pivote_celda.type == 'Intransitable':
-                        content += '\n\tnode[label="Intransitable" fillcolor="red" pos="{},-{}!" shape=box]i{}_{};'.format( #pos="{},-{}!"
-                            posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id
-                        )
-                    elif pivote_celda.type == 'Transitable':
-                        content += '\n\tnode[label="Transitable" fillcolor="white" pos="{},-{}!" shape=box]i{}_{};'.format( #pos="{},-{}!"
-                            posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id
-                        )
-                    elif pivote_celda.type == 'Entrada':
-                        content += '\n\tnode[label="Entrada" fillcolor="green" pos="{},-{}!" shape=box]i{}_{};'.format( #pos="{},-{}!"
-                            posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id
-                        )
-                    elif pivote_celda.type == 'UnidadCivil':
-                        content += '\n\tnode[label="Unidad Civil" fillcolor="blue" pos="{},-{}!" shape=box]i{}_{};'.format( #pos="{},-{}!"
-                            posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id
-                        )
-                    elif pivote_celda.type == 'Restaurante':
-                        content += '\n\tnode[label="Restaurante" fillcolor="lightgrey" pos="{},-{}!" shape=box]i{}_{};'.format( #pos="{},-{}!"
-                            posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id
-                        )
-                    else:
-                        content += '\n\tnode[label="U" fillcolor="pink" pos="{},-{}!" shape=box]i{}_{};'.format( # pos="{},-{}!"
-                            posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id
-                        ) 
+                    content += '\n\tnode[label={} fillcolor="blue" pos="{},-{}!" shape=box]i{}_{};'.format( #pos="{},-{}!"
+                    pivote_celda.type, posy_celda, posx, pivote_celda.x_coordinate.id, pivote_celda.y_coordinate.id)
                     pivote_celda = pivote_celda.right
                 
                 pivote_celda = pivot.access
@@ -187,9 +164,13 @@ class SparseMatrix:
                 pivot = pivot.next
                     
             content += '\n}'
-            #--- se genera DOT y se procede a ecjetuar el comando
             dot = "matriz_{}_dot.txt".format(name)
             with open(dot, 'w') as grafo:
                 grafo.write(content)
             result = "matriz_{}.png".format(name)
             os.system("neato -Tpng " + dot + " -o " + result)
+
+    def open_graph(self, ruta):
+        ruta_absoluta = os.path.join(os.getcwd(), ruta)
+        imagen = Image.open(ruta_absoluta)
+        imagen.show()

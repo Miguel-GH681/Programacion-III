@@ -1,4 +1,3 @@
 class MyModel:
-    def __init__(self, id, name):
+    def __init__(self, id):
         self.id = id
-        self.name = name

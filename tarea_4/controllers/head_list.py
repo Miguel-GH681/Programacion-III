@@ -46,7 +46,6 @@ class HeadList:
     def showHeaders(self):
         tmp = self.first
         while tmp != None:
-            print('Cabecera: ', self.type, tmp.item.id)
             tmp = tmp.next
         
     def getHeader(self, id) -> HeadNode:
